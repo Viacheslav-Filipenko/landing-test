@@ -46,6 +46,15 @@ const rocketAnimation = anime({
   easing: "linear",
   duration: 3000,
   direction: "reverse",
+  begin: animation => {
+    const rocket = animation.animatables[0].target;
+    rocket.style.opacity = 1;
+  },
+  complete: animation => {
+    const overlay = document.querySelector('.overlay');
+    overlay.style.zIndex = -1;
+    // console.log()
+  },
   update: event => {
     const rocket = event.animatables[0].target;
     const rocketCoordinates = getCoordinatesOfElement(rocket);
@@ -98,15 +107,14 @@ const rocketAnimation = anime({
             translateX: bottomDirectionPoint.x - r / 3,
             translateY: bottomDirectionPoint.y + r / 3,
             r,
-            //   scale: anime.random(1, 9),
             easing: "linear",
-            duration: anime.random(4000, 9000)
+            duration: anime.random(3000, 9000)
           });
 
           setTimeout(() => {
             top.pause();
             bottom.pause();
-          }, 3000);
+          }, 3200);
         });
       }
     }
@@ -114,3 +122,8 @@ const rocketAnimation = anime({
     i += 1;
   }
 });
+
+
+document.querySelector('#navbar-prototype').addEventListener('click', event => {
+  console.log(event)
+})
