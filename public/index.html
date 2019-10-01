@@ -5,104 +5,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>SkySoft landing animation</title>
     <link rel="stylesheet" href="./fonts/stylesheet.css">
     <link rel="stylesheet" href="./styles/style.css">
 </head>
 
 <body>
-
-    <svg class="overlay" viewBox="0 0 1920 1080">
-        <defs>
-            <g id="header-prototype">
-                <text x="66.4%" y="7.1%">Services</text>
-                <text x="72.3%" y="7.1%">Cases</text>
-                <text x="77.3%" y="7.1%">About</text>
-                <text x="81.9%" y="7.1%">Career</text>
-                <text x="87.2%" y="7.1%">Contact us</text>
-            </g>
-            <g id="heading-prototype">
-                <text class="heading" x="30.75%" y="46vh">Join The Stars</text>
-                <text class="subheading" x="29%" y="50.3%">SkySoft Software & Apps Development Company</text>
-            </g>
-            <g id="navbar-prototype">
-                <circle cx="95.8%" cy="34.3%" r="5.5"></circle>
-                <circle cx="95.8%" cy="40.3%" r="5.5"></circle>
-                <circle cx="95.8%" cy="45.2%" r="5.5"></circle>
-                <circle cx="95.8%" cy="50%" r="5.5"></circle>
-                <circle cx="95.8%" cy="55%" r="5.5"></circle>
-                <circle cx="95.8%" cy="59.9%" r="5.5"></circle>
-                <circle cx="95.8%" cy="64.9%" r="5.5"></circle>
-                <circle cx="95.8%" cy="69.8%" r="5.5"></circle>
-            </g>
-        </defs>
-        <g>
-            <image id="rocket" xlink:href="./assets/img/rocket.svg"></image>
-            <path fill="none" id="rocket-path" d="M-285,42.25 C640,1500 1270,210 1920,242.25"></path>
-        </g>
+    <img id="rocket" src="./assets/img/rocket.svg" />
+    <svg viewBox="0 0 1920 1080">
+        <path fill="none" id="rocket-path" d="M-305,42.25 C640,1500 1270,210 1920,242.25"></path>
     </svg>
 
-
     <div class="container">
-        <svg class="before-animation" viewBox="0 0 1920 1080">
+        <header>
+            <img class="logo" src="assets/img/blue-logo.svg">
+            <div class="menu last">
+                <a style="color: #0075ff">Services</a>
+                <a style="color: #0075ff">Cases</a>
+                <a style="color: #0075ff">About</a>
+                <a style="color: #0075ff">Career</a>
+                <a style="color: #0075ff">Contact us</a>
+            </div>
+        </header>
+        <div class="content">
+            <div class="heading-container">
+                <span style="color: #0075ff" class="heading">Join The Stars</span>
+                <span style="color: #0075ff" class="subheading">SkySoft Software & Apps Development Company</span>
+            </div>
+            <button primary>
+                See our Services
+            </button>
+        </div>
+        <svg width="0" height="0">
             <clipPath id="myMask"></clipPath>
-            <image class="logo" x="8.5%" y="6.5%" xlink:href="./assets/img/blue-logo.svg"></image>
-            <use xlink:href="#heading-prototype" fill="#0075ff"></use>
-            <use xlink:href="#header-prototype" fill="#0075ff"></use>
-            <use xlink:href="#navbar-prototype" fill="#0075ff"></use>
         </svg>
     </div>
 
-
-
     <div class="container container-test">
-
         <header>
-            <ul>
-                <li>Services</li>
-                <li>Cases</li>
-                <li>About</li>
-                <li>Career</li>
-                <li>Contact us</li>
-            </ul>
+            <img class="logo" src="assets/img/white-logo.svg">
+            <div class="menu">
+                <a>Services</a>
+                <a>Cases</a>
+                <a>About</a>
+                <a>Career</a>
+                <a>Contact us</a>
+            </div>
+            <img class="mobile-menu-icon" src="./assets/img/mobile-menu-icon.svg" />
         </header>
 
-        <div class="navbar">
-            <a></a>
-            <a>x</a>
-            <a>x</a>
-            <a>x</a>
-        </div>
-
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" version="1.1"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-            <g>
-
-                <g>
-                    <image class="planet" x="8.5%" y="14.5%" xlink:href="./assets/img/big-blue-planet.svg"></image>
-                    <image class="planet" x="81.8%" y="52.2%" xlink:href="./assets/img/small-blue-planet.svg"></image>
-                    <image class="planet" x="22.8%" y="66.8%" xlink:href="./assets/img/medium-purple-planet.svg">
-                    </image>
-                    <image class="planet" x="59%" y="28.4%" xlink:href="./assets/img/small-purple-planet.svg"></image>
-                    <image class="planet" x="64.5%" y="-23%" xlink:href="./assets/img/big-purple-planet.svg"></image>
-                </g>
-
-                <image class="logo" x="8.5%" y="6.7%" xlink:href="./assets/img/white-logo.svg"></image>
-                <use xlink:href="#heading-prototype" fill="#ffffff"></use>
-                <use xlink:href="#header-prototype" fill="#ffffff"></use>
-                <use xlink:href="#navbar-prototype" fill="#ffffff"></use>
-            </g>
-        </svg>
-        <div class="button-container">
-            <button class="btn">
+        <div class="content">
+            <div class="heading-container">
+                <span class="heading">Join The Stars</span>
+                <span class="subheading">SkySoft Software & Apps Development Company</span>
+            </div>
+            <button primary>
                 See our Services
             </button>
         </div>
 
+        <!-- <nav class="navbar">
+            <a></a>
+            <a></a>
+            <a></a>
+            <a></a>
+            <a></a>
+        </nav> -->
+
+        <div class="planets-group">
+            <img class="big-blue-planet" src="./assets/img/big-blue-planet.svg" />
+            <img class="small-blue-planet" src="./assets/img/small-blue-planet.svg" />
+            <img class="medium-purple-planet" src="./assets/img/medium-purple-planet.svg" />
+            <img class="small-purple-planet" src="./assets/img/small-purple-planet.svg" />
+            <img class="big-purple-planet" src="./assets/img/big-purple-planet.svg" />
+        </div>
+
+        <div class="comet-group">
+            <img class="green-comet" src="./assets/img/green-comet.svg" />
+            <img class="yellow-comet" src="./assets/img/yellow-comet.svg" />
+        </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.min.js"
-        integrity="sha256-BuxrUdr/4YoztQLxT6xmdO6hSQw2d6BtBUY1pteGds4=" crossorigin="anonymous"></script>
     <script type="module" src="./js/index.js"></script>
 </body>
 

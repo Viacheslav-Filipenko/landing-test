@@ -1,3 +1,4 @@
+import anime from "../../node_modules/animejs/lib/anime.es.js";
 import { Point } from "./models/point.js";
 import {
   getTopDirectionPoint,
@@ -8,9 +9,19 @@ export const getHypotenuse = (a, b) => {
   return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
 };
 
-const anime = window.anime;
+document.querySelector(".mobile-menu-icon").addEventListener("click", event => {
+  document.querySelector(".menu").setAttribute("active", true);
+});
+
+const width = Math.max(document.body.clientWidth);
+const height = Math.max(document.body.clientHeight);
+
+// document.querySelector('#rocket-path').attributes.d = `M-85,${height / 4 - 200} C${width / 3},1500 1270,210 ${width},${height /4}`;
+
+//`M-85,${height / 4 - 200} C${width / 3},1500 1270,210 ${width},${height /4}`
 const path = anime.path("#rocket-path");
 
+const w = Math.round((window.innerWidth / 1980) * 10) / 10;
 /**
  * @param {Element} element dom element
  */
@@ -38,7 +49,42 @@ let previous = null;
 let i = 0;
 const mask = document.querySelector("#myMask");
 
-const rocketAnimation = anime({
+anime({
+  targets: [".green-comet", ".yellow-comet"],
+  rotate: {
+    value: 45,
+    duration: 0
+  },
+  translateY: 2000,
+  easing: "linear",
+  duration: 3000,
+  loop: true,
+  delay: anime.stagger(1400),
+  begin: animation => {
+    animation.animatables.forEach(({ target }) => {
+      target.style.opacity = 1;
+    });
+  }
+});
+
+// anime({
+//   targets: ".yellow-comet",
+//   rotate: {
+//     value: 52,
+//     duration: 0
+//   },
+//   delay: 1200,
+//   translateY: 2000,
+//   easing: "linear",
+//   duration: 3000,
+//   loop: true,
+//   begin: animation => {
+//     const rocket = animation.animatables[0].target;
+//     rocket.style.opacity = 1;
+//   }
+// });
+
+anime({
   targets: "#rocket",
   translateX: path("x"),
   translateY: path("y"),
@@ -49,11 +95,6 @@ const rocketAnimation = anime({
   begin: animation => {
     const rocket = animation.animatables[0].target;
     rocket.style.opacity = 1;
-  },
-  complete: animation => {
-    const overlay = document.querySelector('.overlay');
-    overlay.style.zIndex = -1;
-    // console.log()
   },
   update: event => {
     const rocket = event.animatables[0].target;
@@ -91,7 +132,7 @@ const rocketAnimation = anime({
           circleBottom.setAttribute("id", "bottom" + i);
           mask.appendChild(circleBottom);
 
-          const r = anime.random(600, 1000);
+          const r = anime.random(600, 1000) * w;
 
           const top = anime({
             targets: `#${id}`,
@@ -122,8 +163,3 @@ const rocketAnimation = anime({
     i += 1;
   }
 });
-
-
-document.querySelector('#navbar-prototype').addEventListener('click', event => {
-  console.log(event)
-})

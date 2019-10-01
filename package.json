@@ -4,7 +4,9 @@
   "description": "landing-test",
   "main": "app.js",
   "dependencies": {
+    "animejs": "^3.1.0",
     "express": "^4.17.1",
+    "install": "^0.13.0",
     "path": "^0.12.7"
   },
   "devDependencies": {},
