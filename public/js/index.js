@@ -9,19 +9,25 @@ export const getHypotenuse = (a, b) => {
   return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
 };
 
-document.querySelector(".mobile-menu-icon").addEventListener("click", event => {
-  document.querySelector(".menu").setAttribute("active", true);
+document.querySelectorAll(".mobile-menu-icon").forEach(element => {
+  element.addEventListener("click", event => {
+    document.querySelector(".mobile").setAttribute("active", true);
+  });
+});
+
+document.querySelectorAll(".close-icon").forEach(element => {
+  element.addEventListener("click", event => {
+    document.querySelector(".mobile").removeAttribute("active");
+  });
 });
 
 const width = Math.max(document.body.clientWidth);
 const height = Math.max(document.body.clientHeight);
 
-console.log(width, height);
-
 const rocketPath = document.querySelector("#rocket-path");
 
 if (width < 750) {
-  rocketPath.setAttribute("d", `M${width} 0 L ${width} 1080`);
+  rocketPath.setAttribute("d", `M${1680} -200 C1131,915 301,1001 ${-600} 1080`);
 }
 
 const path = anime.path("#rocket-path");
@@ -38,15 +44,25 @@ const getCoordinatesOfElement = element => {
   );
 };
 
-const createCircle = (x, y) => {
+const createSvg = (element, attributes) => {
+  const circle = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    element
+  );
+  Object.keys(attributes).forEach(attribute => {
+    circle.setAttribute(attribute, attributes[attribute]);
+  });
+  return circle;
+};
+
+const createCircle = attributes => {
   const circle = document.createElementNS(
     "http://www.w3.org/2000/svg",
     "circle"
   );
-  circle.setAttribute("r", 20);
-  circle.setAttribute("fill", "red");
-  circle.setAttribute("cx", x);
-  circle.setAttribute("cy", y);
+  Object.keys(attributes).forEach(attribute => {
+    circle.setAttribute(attribute, attributes[attribute]);
+  });
   return circle;
 };
 
@@ -72,6 +88,40 @@ anime({
   }
 });
 
+// document.querySelector(".navbar").addEventListener("click", event => {
+
+//   const target = event.target;
+
+//   if (target.classList.contains("active")) {
+//     target.classList.remove("active");
+//     anime({
+//       targets: target,
+//       scale: 1,
+//       duration: 1000
+//     });
+//   } else {
+//     target.classList.add("active");
+//     anime({
+//       targets: target,
+//       scale: 2,
+//       duration: 1000
+//     });
+//   }
+// });
+
+document.addEventListener("mousemove", event => {
+  document.querySelector(".big-blue-planet").style.transform = "rotate(30deg)";
+
+  // anime({
+  //   targets: '.big-blue-planet',
+  //   translateX: -1,
+  //   translateY: -1,
+  //   // scale: 0.1,
+  //   easing: "linear",
+  //   duration: 9000
+  // })
+});
+
 anime({
   targets: "#rocket",
   translateX: path("x"),
@@ -88,14 +138,21 @@ anime({
     const rocket = animation.animatables[0].target;
     rocket.style.opacity = 0;
     rocket.style.zIndex = -2;
+
+    setTimeout(() => {
+      document.querySelector(".test").remove();
+    }, 3200);
   },
-  update: event => {
-    const rocket = event.animatables[0].target;
+  update: animation => {
+    const rocket = animation.animatables[0].target;
     const rocketCoordinates = getCoordinatesOfElement(rocket);
 
     if (previous) {
       if (i % 3 === 0) {
-        const dist = anime.random(400, 500);
+        const dist = anime.random(400, 500) * w;
+
+        const startRadius = 20 * w;
+
         const topDirectionPoint = getTopDirectionPoint(
           rocketCoordinates,
           previous,
@@ -107,15 +164,20 @@ anime({
           dist
         );
 
-        const circleTop = createCircle(
-          Math.round(rocketCoordinates.x),
-          Math.round(rocketCoordinates.y - 30)
-        );
+        const cx = rocketCoordinates.x;
+        const cy = rocketCoordinates.y - 20;
 
-        const circleBottom = createCircle(
-          Math.round(rocketCoordinates.x),
-          Math.round(rocketCoordinates.y - 30)
-        );
+        const circleTop = createCircle({
+          r: startRadius,
+          cx,
+          cy
+        });
+
+        const circleBottom = createCircle({
+          r: startRadius,
+          cx,
+          cy
+        });
 
         window.requestAnimationFrame(() => {
           const id = "top" + i;
@@ -133,7 +195,7 @@ anime({
             translateY: topDirectionPoint.y - r / 3,
             r,
             easing: "linear",
-            duration: anime.random(4000, 9000)
+            duration: anime.random(3000, 9000)
           });
 
           const bottom = anime({
