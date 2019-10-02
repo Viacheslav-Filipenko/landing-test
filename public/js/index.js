@@ -140,7 +140,7 @@ anime({
     rocket.style.zIndex = -2;
 
     setTimeout(() => {
-      document.querySelector(".test").remove();
+      document.querySelector(".delete").remove();
     }, 3200);
   },
   update: animation => {
