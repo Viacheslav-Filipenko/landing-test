@@ -1,4 +1,6 @@
 body {
+  width: 100%;
+  height: 100%;
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -91,7 +93,6 @@ header .menu a {
   font-size: 6em;
   line-height: 60px;
   font-weight: bold;
-  padding-left: 10px;
   text-transform: uppercase;
   color: white;
 }
@@ -101,7 +102,6 @@ header .menu a {
   font-family: "Museo Sans Cyrl";
   font-size: 1.5em;
   font-weight: 370;
-  padding-left: 23px;
   line-height: 60px;
   letter-spacing: 0.21em;
   text-transform: uppercase;
@@ -160,6 +160,7 @@ button[primary]:hover {
 
 .mobile-menu-icon {
   display: none;
+  cursor: pointer;
 }
 
 .menu[active] {
@@ -194,15 +195,53 @@ button[primary]:hover {
     display: none;
     left: 0;
     top: 0;
-    position: absolute;
-    width: 100%;
-    max-width: 100%;
+    position: fixed;
+    width: 100vw;
     height: 100vh;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: #363636;
     z-index: 20;
+  }
+
+  .planets-group .big-blue-planet {
+    top: -12%;
+    left: -31%;
+  }
+
+  .planets-group .medium-purple-planet {
+    width: 47%;
+    top: 78%;
+    left: -2%;
+  }
+
+  .planets-group .small-blue-planet {
+    top: 65.6%;
+    left: 67.5%;
+    width: 27%;
+  }
+
+  .planets-group .big-purple-planet,
+  .planets-group .small-purple-planet {
+    display: none;
+  }
+
+  .heading {
+    font-size: 2.5em;
+  }
+
+  .subheading {
+    padding-top: 0;
+    font-size: 0.6em;
+    line-height: initial;
+    letter-spacing: 0.21em;
+  }
+
+  button[primary] {
+    font-size: 11px;
+    line-height: 46px;
+    padding: 3px 46px;
   }
 }
 
@@ -218,7 +257,10 @@ button[primary]:hover {
 }
 
 svg {
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 0;
   left: 0;
+  z-index: -1;
 }

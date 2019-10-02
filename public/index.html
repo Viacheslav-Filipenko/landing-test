@@ -11,9 +11,11 @@
 </head>
 
 <body>
+
     <img id="rocket" src="./assets/img/rocket.svg" />
     <svg viewBox="0 0 1920 1080">
-        <path fill="none" id="rocket-path" d="M-305,42.25 C640,1500 1270,210 1920,242.25"></path>
+        <path stroke="black" style="stroke-width: 5px" fill="none" id="rocket-path"
+            d="M-305,42.25 C640,1500 1270,210 1920,242.25"></path>
     </svg>
 
     <div class="container">
@@ -26,6 +28,8 @@
                 <a style="color: #0075ff">Career</a>
                 <a style="color: #0075ff">Contact us</a>
             </div>
+            <div class="mobile-menu-icon"><img src="./assets/img/icons/blue-mobile-menu.svg" /></div>
+
         </header>
         <div class="content">
             <div class="heading-container">
@@ -51,7 +55,7 @@
                 <a>Career</a>
                 <a>Contact us</a>
             </div>
-            <img class="mobile-menu-icon" src="./assets/img/mobile-menu-icon.svg" />
+              <div class="mobile-menu-icon"><img src="./assets/img/mobile-menu-icon.svg" /></div>
         </header>
 
         <div class="content">
@@ -64,13 +68,13 @@
             </button>
         </div>
 
-        <!-- <nav class="navbar">
+        <nav class="navbar">
             <a></a>
             <a></a>
             <a></a>
             <a></a>
             <a></a>
-        </nav> -->
+        </nav>
 
         <div class="planets-group">
             <img class="big-blue-planet" src="./assets/img/big-blue-planet.svg" />
@@ -85,6 +89,8 @@
             <img class="yellow-comet" src="./assets/img/yellow-comet.svg" />
         </div>
     </div>
+
+
 
     <script type="module" src="./js/index.js"></script>
 </body>

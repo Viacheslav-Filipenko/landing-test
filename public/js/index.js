@@ -1,4 +1,4 @@
-import anime from "../../node_modules/animejs/lib/anime.es.js";
+import anime from "./anime.es.js";
 import { Point } from "./models/point.js";
 import {
   getTopDirectionPoint,
@@ -16,9 +16,14 @@ document.querySelector(".mobile-menu-icon").addEventListener("click", event => {
 const width = Math.max(document.body.clientWidth);
 const height = Math.max(document.body.clientHeight);
 
-// document.querySelector('#rocket-path').attributes.d = `M-85,${height / 4 - 200} C${width / 3},1500 1270,210 ${width},${height /4}`;
+console.log(width, height);
 
-//`M-85,${height / 4 - 200} C${width / 3},1500 1270,210 ${width},${height /4}`
+const rocketPath = document.querySelector("#rocket-path");
+
+if (width < 750) {
+  rocketPath.setAttribute("d", `M${width} 0 L ${width} 1080`);
+}
+
 const path = anime.path("#rocket-path");
 
 const w = Math.round((window.innerWidth / 1980) * 10) / 10;
@@ -67,23 +72,6 @@ anime({
   }
 });
 
-// anime({
-//   targets: ".yellow-comet",
-//   rotate: {
-//     value: 52,
-//     duration: 0
-//   },
-//   delay: 1200,
-//   translateY: 2000,
-//   easing: "linear",
-//   duration: 3000,
-//   loop: true,
-//   begin: animation => {
-//     const rocket = animation.animatables[0].target;
-//     rocket.style.opacity = 1;
-//   }
-// });
-
 anime({
   targets: "#rocket",
   translateX: path("x"),
@@ -95,6 +83,11 @@ anime({
   begin: animation => {
     const rocket = animation.animatables[0].target;
     rocket.style.opacity = 1;
+  },
+  complete: animation => {
+    const rocket = animation.animatables[0].target;
+    rocket.style.opacity = 0;
+    rocket.style.zIndex = -2;
   },
   update: event => {
     const rocket = event.animatables[0].target;
