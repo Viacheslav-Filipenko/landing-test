@@ -70,13 +70,14 @@ let previous = null;
 let i = 0;
 const mask = document.querySelector("#myMask");
 
+
 anime({
   targets: [".green-comet", ".yellow-comet"],
   rotate: {
     value: 45,
     duration: 0
   },
-  translateY: 2000,
+  translateY: height * 2,
   easing: "linear",
   duration: 3000,
   loop: true,
@@ -88,39 +89,7 @@ anime({
   }
 });
 
-// document.querySelector(".navbar").addEventListener("click", event => {
 
-//   const target = event.target;
-
-//   if (target.classList.contains("active")) {
-//     target.classList.remove("active");
-//     anime({
-//       targets: target,
-//       scale: 1,
-//       duration: 1000
-//     });
-//   } else {
-//     target.classList.add("active");
-//     anime({
-//       targets: target,
-//       scale: 2,
-//       duration: 1000
-//     });
-//   }
-// });
-
-document.addEventListener("mousemove", event => {
-  document.querySelector(".big-blue-planet").style.transform = "rotate(30deg)";
-
-  // anime({
-  //   targets: '.big-blue-planet',
-  //   translateX: -1,
-  //   translateY: -1,
-  //   // scale: 0.1,
-  //   easing: "linear",
-  //   duration: 9000
-  // })
-});
 
 anime({
   targets: "#rocket",

@@ -134,26 +134,31 @@ button[primary]:hover {
 }
 
 .planets-group .big-blue-planet {
+  width: 17%;
   top: 16%;
   left: 8.5%;
 }
 
 .planets-group .small-blue-planet {
+  width: 9%;
   top: 58.2%;
   left: 81.7%;
 }
 
 .planets-group .medium-purple-planet {
+  width: 11%;
   top: 74.2%;
   left: 22.8%;
 }
 
 .planets-group .small-purple-planet {
+  width: 4.5%;
   top: 31.5%;
   left: 59%;
 }
 
 .planets-group .big-purple-planet {
+  width: 31%;
   top: -25.8%;
   left: 64.6%;
 }
@@ -162,7 +167,6 @@ button[primary]:hover {
   display: none;
   cursor: pointer;
 }
-
 
 .comet-group img {
   position: absolute;
@@ -192,7 +196,7 @@ header .close-icon {
   cursor: pointer;
 }
 
-@media only screen and (max-width: 1000px) { 
+@media only screen and (max-width: 1000px) {
   .heading {
     font-size: 5em;
   }
@@ -345,4 +349,3 @@ svg {
     letter-spacing: 0.1em;
   }
 }
-
