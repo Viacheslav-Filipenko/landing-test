@@ -1,14 +1,9 @@
 import anime from "./anime.es.js";
-import { Point } from "./models/point.js";
+import { getSizeOfScreen, getCoordinatesOfElement } from "./utils/index.js";
 import {
   getTopDirectionPoint,
   getBottomDirectionPoint
 } from "./utils/point.js";
-
-export const getHypotenuse = (a, b) => {
-  return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
-};
-
 document.querySelectorAll(".mobile-menu-icon").forEach(element => {
   element.addEventListener("click", event => {
     document.querySelector(".mobile").setAttribute("active", true);
@@ -21,39 +16,102 @@ document.querySelectorAll(".close-icon").forEach(element => {
   });
 });
 
-const width = Math.max(document.body.clientWidth);
-const height = Math.max(document.body.clientHeight);
+let active = null;
 
-const rocketPath = document.querySelector("#rocket-path");
+document.querySelector("nav").addEventListener(
+  "click",
+  event => {
+    const parent = event.target.parentNode;
+    if (!parent.classList.contains("navbar-item")) {
+      return;
+    }
 
-if (width < 750) {
-  rocketPath.setAttribute("d", `M${1680} -200 C1131,915 301,1001 ${-600} 1080`);
+    const duration = 250;
+
+    const whiteCircle = parent.querySelector(".white-circle");
+    const purpleCicle = parent.querySelector(".purple-circle");
+
+    if (active !== parent && active !== null) {
+      active.classList.remove("active");
+
+      anime({
+        targets: active.querySelector(".white-circle"),
+        scale: 1,
+        easing: "linear",
+        duration
+      });
+
+      anime({
+        targets: active.querySelector(".purple-circle"),
+        scale: 1,
+        easing: "linear",
+        duration,
+        complete: animation => {
+          animation.animatables[0].target.style.opacity = 0;
+        }
+      });
+    }
+
+    active = parent;
+
+    if (parent.classList.contains("active")) {
+      parent.classList.remove("active");
+
+      anime({
+        targets: whiteCircle,
+        scale: 1,
+        easing: "linear",
+        duration
+      });
+
+      anime({
+        targets: purpleCicle,
+        scale: 1,
+        easing: "linear",
+        duration,
+        complete: animation => {
+          animation.animatables[0].target.style.opacity = 0;
+        }
+      });
+    } else {
+      parent.classList.add("active");
+
+      anime({
+        targets: whiteCircle,
+        scale: 2,
+        easing: "linear",
+        duration,
+        begin: () => {
+          purpleCicle.style.opacity = 1;
+        }
+      });
+
+      anime({
+        targets: purpleCicle,
+        scale: 6,
+        easing: "linear",
+        duration,
+        begin: () => {
+          purpleCicle.style.opacity = 1;
+        }
+      });
+    }
+  }
+);
+
+const { width, height } = getSizeOfScreen();
+
+if (width < 500) {
+  const rocketPath = document.querySelector("#rocket-path");
+  rocketPath.setAttribute("d", `M${600} -200 L${600} 1080`);
+} else if (width < 750) {
+  const rocketPath = document.querySelector("#rocket-path");
+  rocketPath.setAttribute("d", `M${1680} -200 C1131,915 301,1201 ${-600} 1080`);
 }
 
+const w = Math.round((width / 1980) * 10) / 10;
+
 const path = anime.path("#rocket-path");
-
-const w = Math.round((window.innerWidth / 1980) * 10) / 10;
-/**
- * @param {Element} element dom element
- */
-const getCoordinatesOfElement = element => {
-  const elementRect = element.getBoundingClientRect();
-  return new Point(
-    elementRect.x + elementRect.width / 2,
-    elementRect.y + elementRect.height / 2
-  );
-};
-
-const createSvg = (element, attributes) => {
-  const circle = document.createElementNS(
-    "http://www.w3.org/2000/svg",
-    element
-  );
-  Object.keys(attributes).forEach(attribute => {
-    circle.setAttribute(attribute, attributes[attribute]);
-  });
-  return circle;
-};
 
 const createCircle = attributes => {
   const circle = document.createElementNS(
@@ -66,10 +124,10 @@ const createCircle = attributes => {
   return circle;
 };
 
-let previous = null;
-let i = 0;
 const mask = document.querySelector("#myMask");
 
+let previous = null;
+let i = 0;
 
 anime({
   targets: [".green-comet", ".yellow-comet"],
@@ -88,8 +146,6 @@ anime({
     });
   }
 });
-
-
 
 anime({
   targets: "#rocket",
@@ -110,7 +166,7 @@ anime({
 
     setTimeout(() => {
       document.querySelector(".delete").remove();
-    }, 3200);
+    }, 3000);
   },
   update: animation => {
     const rocket = animation.animatables[0].target;
@@ -120,7 +176,7 @@ anime({
       if (i % 3 === 0) {
         const dist = anime.random(400, 500) * w;
 
-        const startRadius = 20 * w;
+        const r = 20 * w;
 
         const topDirectionPoint = getTopDirectionPoint(
           rocketCoordinates,
@@ -133,45 +189,40 @@ anime({
           dist
         );
 
-        const cx = rocketCoordinates.x;
+        const cx = rocketCoordinates.x + 15;
         const cy = rocketCoordinates.y - 20;
 
         const circleTop = createCircle({
-          r: startRadius,
+          r,
           cx,
           cy
         });
 
         const circleBottom = createCircle({
-          r: startRadius,
+          r,
           cx,
           cy
         });
 
         window.requestAnimationFrame(() => {
-          const id = "top" + i;
-          circleTop.setAttribute("id", id);
           mask.appendChild(circleTop);
-
-          circleBottom.setAttribute("id", "bottom" + i);
           mask.appendChild(circleBottom);
-
-          const r = anime.random(600, 1000) * w;
+          const endRadius = anime.random(600, 1000) * w;
 
           const top = anime({
-            targets: `#${id}`,
-            translateX: topDirectionPoint.x - r / 3,
-            translateY: topDirectionPoint.y - r / 3,
-            r,
+            targets: circleTop,
+            translateX: topDirectionPoint.x - endRadius / 3,
+            translateY: topDirectionPoint.y - endRadius / 3,
+            r: endRadius,
             easing: "linear",
             duration: anime.random(3000, 9000)
           });
 
           const bottom = anime({
-            targets: "#bottom" + i,
-            translateX: bottomDirectionPoint.x - r / 3,
-            translateY: bottomDirectionPoint.y + r / 3,
-            r,
+            targets: circleBottom,
+            translateX: bottomDirectionPoint.x - endRadius / 3,
+            translateY: bottomDirectionPoint.y + endRadius / 3,
+            r: endRadius,
             easing: "linear",
             duration: anime.random(3000, 9000)
           });

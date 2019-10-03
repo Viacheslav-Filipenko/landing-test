@@ -7,15 +7,46 @@ body {
 }
 
 #rocket {
-  opacity: 0;
   height: 20%;
-  position: absolute;
   z-index: 100;
 }
 
-header {
+header,
+header .menu,
+.container,
+.content,
+.heading-container {
   display: flex;
+}
+
+header,
+header .menu,
+.container {
   justify-content: space-between;
+}
+
+.comet-group .yellow-comet,
+.comet-group .green-comet,
+#rocket {
+  opacity: 0;
+}
+
+header .contact-group,
+header .close-icon,
+.mobile-menu-icon {
+  display: none;
+}
+
+header .close-icon,
+header .menu a,
+button[primary],
+.navbar-icon-after-animation,
+.navbar .navbar-icon,
+.mobile-menu-icon {
+  cursor: pointer;
+}
+
+header {
   align-items: flex-end;
   max-width: 83vw;
   width: 100%;
@@ -23,10 +54,8 @@ header {
 }
 
 header .menu {
-  display: flex;
   max-width: 486px;
   width: 100%;
-  justify-content: space-between;
 }
 
 header .menu a {
@@ -34,23 +63,15 @@ header .menu a {
   line-height: 60px;
   font-family: "Museo Sans Cyrl";
   color: white;
-  cursor: pointer;
 }
 
-.overlay {
-  position: absolute;
-  z-index: 10;
-}
-
-.biggest-planet {
-  background: linear-gradient(223.93deg, #b86dde 32.98%, #295eee 92.65%);
+.blue {
+  color: #0075ff !important;
 }
 
 .container {
   width: 100vw;
   height: 100vh;
-  display: flex;
-  justify-content: space-between;
   flex-direction: column;
   align-items: center;
   overflow: hidden;
@@ -59,7 +80,6 @@ header .menu a {
 .container-test {
   left: 0;
   top: 0;
-  position: absolute;
   clip-path: url(#myMask);
   background-image: url("../assets/img/background.svg");
   background-position: center;
@@ -69,7 +89,6 @@ header .menu a {
 
 .content,
 .heading-container {
-  display: flex;
   flex-direction: column;
   align-items: center;
 }
@@ -78,14 +97,55 @@ header .menu a {
   margin-top: 35px;
 }
 
-.heading-container {
+.heading-container,
+.content {
   justify-content: center;
+}
+
+nav {
+  position: absolute;
+  height: 200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+  left: 95%;
+  top: 40%;
+}
+
+nav a .purple-circle,
+nav a .white-circle {
+  border-radius: 50%;
+}
+
+nav a {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+nav a .purple-circle {
+  width: 2px;
+  height: 2px;
+  left: 48%;
+  top: 48%;
+  position: absolute;
+
+  opacity: 0;
+  background-color: #502399;
+}
+
+nav a .white-circle {
+  width: 11px;
+  height: 11px;
+  background-color: #ffffff;
 }
 
 .content {
   height: 100%;
   width: 100%;
-  justify-content: center;
 }
 
 .heading {
@@ -109,7 +169,6 @@ header .menu a {
 }
 
 button[primary] {
-  cursor: pointer;
   border: none;
   background: linear-gradient(116.49deg, #fd0079 0%, #ffd200 105.21%);
   border-radius: 100px;
@@ -128,7 +187,6 @@ button[primary]:hover {
 }
 
 .planets-group img {
-  position: absolute;
   z-index: -1;
   overflow: hidden;
 }
@@ -163,37 +221,60 @@ button[primary]:hover {
   left: 64.6%;
 }
 
-.mobile-menu-icon {
-  display: none;
-  cursor: pointer;
-}
-
 .comet-group img {
-  position: absolute;
   z-index: -1;
 }
 
 .comet-group .green-comet {
-  opacity: 0;
   width: 2.4%;
   top: -50%;
   left: 118%;
 }
 
 .comet-group .yellow-comet {
-  opacity: 0;
   width: 1.7%;
   top: -50%;
   left: 85%;
 }
 
-header .contact-group {
-  display: none;
+.navbar a {
+  position: relative;
+  width: 11px;
+  height: 11px;
 }
 
-header .close-icon {
-  display: none;
-  cursor: pointer;
+.navbar .navbar-icon,
+.navbar-icon-after-animation,
+.comet-group img,
+.planets-group img,
+.container-test,
+#rocket,
+svg {
+  position: absolute;
+}
+
+.navbar .navbar-icon {
+  border-radius: 100%;
+  width: 11px;
+  height: 11px;
+  left: 50%;
+  top: 50%;
+  background: #ffffff;
+}
+
+.navbar-icon-after-animation {
+  background: #502399;
+  border-radius: 100%;
+  left: 50%;
+  top: 50%;
+  width: 3px;
+  height: 3px;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -210,34 +291,43 @@ header .close-icon {
 }
 
 @media only screen and (max-width: 750px) {
-  .mobile-menu-icon {
-    display: block;
-  }
-
-  header .menu {
-    display: none;
-  }
-
+  .mobile-menu-icon,
   header[active] .close-icon {
     display: block;
   }
 
-  header[active] .mobile-menu-icon {
+  header[active] .logo-container,
+  header[active] .menu,
+  header[active] .contact-group {
+    display: flex;
+  }
+
+  header .menu,
+  nav,
+  header[active] .mobile-menu-icon,
+  .planets-group .big-purple-planet,
+  .planets-group .small-purple-planet {
     display: none;
+  }
+
+  header[active] .logo-container,
+  header[active] .contact-group {
+    justify-content: space-between;
   }
 
   header[active] .logo-container {
     height: 15vh;
-    display: flex;
-    justify-content: space-between;
     width: 83vw;
   }
 
-  header[active] .menu {
-    display: flex;
+  header[active] .menu,
+  header[active] {
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+  }
+
+  header[active] .menu {
+    justify-content: center;
     height: 60vh;
   }
 
@@ -247,8 +337,6 @@ header .close-icon {
     position: fixed;
     width: 100vw;
     height: 100vh;
-    flex-direction: column;
-    align-items: center;
     justify-content: flex-start;
     background-color: #363636;
     z-index: 20;
@@ -256,15 +344,14 @@ header .close-icon {
   }
 
   header[active] .contact-group {
-    display: flex;
-    justify-content: space-between;
     height: 20vh;
     width: 60vw;
   }
 
   .planets-group .big-blue-planet {
-    top: -12%;
-    left: -31%;
+    width: 60%;
+    top: -5%;
+    left: -15%;
   }
 
   .planets-group .medium-purple-planet {
@@ -279,9 +366,16 @@ header .close-icon {
     width: 27%;
   }
 
-  .planets-group .big-purple-planet,
-  .planets-group .small-purple-planet {
-    display: none;
+  .comet-group .green-comet {
+    width: 2.8%;
+    top: -10%;
+    left: 140%;
+  }
+
+  .comet-group .yellow-comet {
+    width: 2%;
+    top: -20%;
+    left: 100%;
   }
 
   .heading {
@@ -300,41 +394,6 @@ header .close-icon {
     line-height: 46px;
     padding: 3px 46px;
   }
-}
-
-.navbar a {
-  position: relative;
-  width: 11px;
-  height: 11px;
-}
-
-.navbar .navbar-icon {
-  position: absolute;
-  border-radius: 100%;
-  width: 11px;
-  height: 11px;
-  left: 50%;
-  top: 50%;
-  cursor: pointer;
-  background: #ffffff;
-}
-
-.navbar-icon-after-animation {
-  background: #502399;
-  position: absolute;
-  border-radius: 100%;
-  left: 50%;
-  top: 50%;
-  width: 3px;
-  height: 3px;
-  cursor: pointer;
-}
-
-svg {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  z-index: -1;
 }
 
 @media only screen and (max-width: 320px) {
