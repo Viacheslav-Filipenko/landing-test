@@ -253,6 +253,10 @@ svg {
   position: absolute;
 }
 
+/* .planets-group img {
+  transition: all 1s;
+} */
+
 .navbar .navbar-icon {
   border-radius: 100%;
   width: 11px;

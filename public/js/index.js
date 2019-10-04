@@ -10,38 +10,67 @@ document.querySelectorAll(".mobile-menu-icon").forEach(element => {
   });
 });
 
-let movement = 0;
-
 let isPlaying = false;
 
-let translateX = 0;
-let translateY = 0;
+const center = getCoordinatesOfElement(
+  document.querySelector(".container-test")
+);
 
 document.addEventListener("mousemove", event => {
-  const x = event.movementX / 10;
-  const y = event.movementY / 10;
-
-  translateX += -x;
-  translateY += -y;
-
   if (isPlaying) {
     return;
   }
 
+  const { clientX, clientY } = event;
   isPlaying = true;
-  let duration = 0;
+
+  const x = (clientX - center.x) / 40;
+  const y = (clientY - center.y) / 40;
+
+  const duration = 0;
 
   anime({
     targets: ".big-blue-planet",
-    translateX,
-    translateY,
+    translateX: -x / 2,
+    translateY: -y / 2,
     easing: "linear",
-    duration: duration,
+    duration,
     complete: () => {
       isPlaying = false;
     }
   });
 
+  anime({
+    targets: ".small-blue-planet",
+    translateX: -x / 4,
+    translateY: -y / 4,
+    easing: "linear",
+    duration
+  });
+
+  anime({
+    targets: ".small-purple-planet",
+    translateX: -x / 5,
+    translateY: -y / 5,
+    easing: "linear",
+    duration
+  });
+
+  anime({
+    targets: ".medium-purple-planet",
+    translateX: -x / 2.5,
+    translateY: -y / 2.5,
+    easing: "linear",
+    duration
+  });
+
+  anime({
+    targets: ".big-purple-planet",
+    translateX: -x,
+    translateY: -y,
+    easing: "linear",
+    duration
+  });
 });
 
 document.querySelectorAll(".close-icon").forEach(element => {
