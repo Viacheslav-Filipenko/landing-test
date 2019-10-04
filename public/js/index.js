@@ -10,6 +10,40 @@ document.querySelectorAll(".mobile-menu-icon").forEach(element => {
   });
 });
 
+let movement = 0;
+
+let isPlaying = false;
+
+let translateX = 0;
+let translateY = 0;
+
+document.addEventListener("mousemove", event => {
+  const x = event.movementX / 10;
+  const y = event.movementY / 10;
+
+  translateX += -x;
+  translateY += -y;
+
+  if (isPlaying) {
+    return;
+  }
+
+  isPlaying = true;
+  let duration = 0;
+
+  anime({
+    targets: ".big-blue-planet",
+    translateX,
+    translateY,
+    easing: "linear",
+    duration: duration,
+    complete: () => {
+      isPlaying = false;
+    }
+  });
+
+});
+
 document.querySelectorAll(".close-icon").forEach(element => {
   element.addEventListener("click", event => {
     document.querySelector(".mobile").removeAttribute("active");
@@ -18,86 +52,83 @@ document.querySelectorAll(".close-icon").forEach(element => {
 
 let active = null;
 
-document.querySelector("nav").addEventListener(
-  "click",
-  event => {
-    const parent = event.target.parentNode;
-    if (!parent.classList.contains("navbar-item")) {
-      return;
-    }
-
-    const duration = 250;
-
-    const whiteCircle = parent.querySelector(".white-circle");
-    const purpleCicle = parent.querySelector(".purple-circle");
-
-    if (active !== parent && active !== null) {
-      active.classList.remove("active");
-
-      anime({
-        targets: active.querySelector(".white-circle"),
-        scale: 1,
-        easing: "linear",
-        duration
-      });
-
-      anime({
-        targets: active.querySelector(".purple-circle"),
-        scale: 1,
-        easing: "linear",
-        duration,
-        complete: animation => {
-          animation.animatables[0].target.style.opacity = 0;
-        }
-      });
-    }
-
-    active = parent;
-
-    if (parent.classList.contains("active")) {
-      parent.classList.remove("active");
-
-      anime({
-        targets: whiteCircle,
-        scale: 1,
-        easing: "linear",
-        duration
-      });
-
-      anime({
-        targets: purpleCicle,
-        scale: 1,
-        easing: "linear",
-        duration,
-        complete: animation => {
-          animation.animatables[0].target.style.opacity = 0;
-        }
-      });
-    } else {
-      parent.classList.add("active");
-
-      anime({
-        targets: whiteCircle,
-        scale: 2,
-        easing: "linear",
-        duration,
-        begin: () => {
-          purpleCicle.style.opacity = 1;
-        }
-      });
-
-      anime({
-        targets: purpleCicle,
-        scale: 6,
-        easing: "linear",
-        duration,
-        begin: () => {
-          purpleCicle.style.opacity = 1;
-        }
-      });
-    }
+document.querySelector("nav").addEventListener("click", event => {
+  const parent = event.target.parentNode;
+  if (!parent.classList.contains("navbar-item")) {
+    return;
   }
-);
+
+  const duration = 250;
+
+  const whiteCircle = parent.querySelector(".white-circle");
+  const purpleCicle = parent.querySelector(".purple-circle");
+
+  if (active !== parent && active !== null) {
+    active.classList.remove("active");
+
+    anime({
+      targets: active.querySelector(".white-circle"),
+      scale: 1,
+      easing: "linear",
+      duration
+    });
+
+    anime({
+      targets: active.querySelector(".purple-circle"),
+      scale: 1,
+      easing: "linear",
+      duration,
+      complete: animation => {
+        animation.animatables[0].target.style.opacity = 0;
+      }
+    });
+  }
+
+  active = parent;
+
+  if (parent.classList.contains("active")) {
+    parent.classList.remove("active");
+
+    anime({
+      targets: whiteCircle,
+      scale: 1,
+      easing: "linear",
+      duration
+    });
+
+    anime({
+      targets: purpleCicle,
+      scale: 1,
+      easing: "linear",
+      duration,
+      complete: animation => {
+        animation.animatables[0].target.style.opacity = 0;
+      }
+    });
+  } else {
+    parent.classList.add("active");
+
+    anime({
+      targets: whiteCircle,
+      scale: 2,
+      easing: "linear",
+      duration,
+      begin: () => {
+        purpleCicle.style.opacity = 1;
+      }
+    });
+
+    anime({
+      targets: purpleCicle,
+      scale: 6,
+      easing: "linear",
+      duration,
+      begin: () => {
+        purpleCicle.style.opacity = 1;
+      }
+    });
+  }
+});
 
 const { width, height } = getSizeOfScreen();
 
@@ -114,14 +145,14 @@ const w = Math.round((width / 1980) * 10) / 10;
 const path = anime.path("#rocket-path");
 
 const createCircle = attributes => {
-  const circle = document.createElementNS(
+  const element = document.createElementNS(
     "http://www.w3.org/2000/svg",
     "circle"
   );
   Object.keys(attributes).forEach(attribute => {
-    circle.setAttribute(attribute, attributes[attribute]);
+    element.setAttribute(attribute, attributes[attribute]);
   });
-  return circle;
+  return element;
 };
 
 const mask = document.querySelector("#myMask");
@@ -166,7 +197,7 @@ anime({
 
     setTimeout(() => {
       document.querySelector(".delete").remove();
-    }, 3000);
+    }, 4000);
   },
   update: animation => {
     const rocket = animation.animatables[0].target;
@@ -175,8 +206,6 @@ anime({
     if (previous) {
       if (i % 3 === 0) {
         const dist = anime.random(400, 500) * w;
-
-        const r = 20 * w;
 
         const topDirectionPoint = getTopDirectionPoint(
           rocketCoordinates,
@@ -191,6 +220,7 @@ anime({
 
         const cx = rocketCoordinates.x + 15;
         const cy = rocketCoordinates.y - 20;
+        const r = 20 * w;
 
         const circleTop = createCircle({
           r,
@@ -238,3 +268,14 @@ anime({
     i += 1;
   }
 });
+
+if (width < 750) {
+  setTimeout(() => {
+    anime({
+      targets: "#filler",
+      r: "150%",
+      easing: "linear",
+      duration: 5000
+    });
+  }, 2500);
+}
