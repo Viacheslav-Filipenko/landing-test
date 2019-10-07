@@ -1,4 +1,5 @@
 import anime from "./anime.es.js";
+import  { Parallax } from './parallax.js'
 import { getSizeOfScreen, getCoordinatesOfElement } from "./utils/index.js";
 import {
   getTopDirectionPoint,
@@ -26,13 +27,15 @@ document.addEventListener("mousemove", event => {
 
   const x = (clientX - center.x) / 40;
   const y = (clientY - center.y) / 40;
+  const rotate = -x / 3;
 
-  const duration = 0;
+  const duration = 1000;
 
   anime({
     targets: ".big-blue-planet",
     translateX: -x / 2,
     translateY: -y / 2,
+    rotate: rotate + 'deg',
     easing: "linear",
     duration,
     complete: () => {
@@ -44,6 +47,7 @@ document.addEventListener("mousemove", event => {
     targets: ".small-blue-planet",
     translateX: -x / 4,
     translateY: -y / 4,
+    rotate: rotate + 'deg',
     easing: "linear",
     duration
   });
@@ -52,6 +56,7 @@ document.addEventListener("mousemove", event => {
     targets: ".small-purple-planet",
     translateX: -x / 5,
     translateY: -y / 5,
+    rotate: rotate + 'deg',
     easing: "linear",
     duration
   });
@@ -60,6 +65,7 @@ document.addEventListener("mousemove", event => {
     targets: ".medium-purple-planet",
     translateX: -x / 2.5,
     translateY: -y / 2.5,
+    rotate: rotate + 'deg',
     easing: "linear",
     duration
   });
@@ -68,6 +74,7 @@ document.addEventListener("mousemove", event => {
     targets: ".big-purple-planet",
     translateX: -x,
     translateY: -y,
+    rotate: rotate + 'deg',
     easing: "linear",
     duration
   });

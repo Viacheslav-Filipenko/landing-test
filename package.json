@@ -1,27 +1,45 @@
 {
-  "name": "landing-test",
-  "version": "1.0.0",
-  "description": "landing-test",
-  "main": "app.js",
-  "dependencies": {
-    "animejs": "^3.1.0",
-    "express": "^4.17.1",
-    "install": "^0.13.0",
-    "path": "^0.12.7"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Viacheslav-Filipenko/landing-test.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Viacheslav-Filipenko/landing-test/issues"
-  },
-  "homepage": "https://github.com/Viacheslav-Filipenko/landing-test#readme"
+	"name": "landing-test",
+	"version": "1.0.0",
+	"description": "landing-test",
+	"main": "app.js",
+	"dependencies": {
+		"animejs": "^3.1.0",
+		"express": "^4.17.1",
+		"install": "^0.13.0",
+		"mini-css-extract-plugin": "^0.8.0",
+		"path": "^0.12.7",
+		"postcss-loader": "^3.0.0",
+		"sass": "^1.23.0",
+		"sass-loader": "^8.0.0"
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.6.2",
+		"@babel/core": "^7.6.2",
+		"@babel/preset-env": "^7.6.2",
+		"babel-loader": "^8.0.6",
+		"babel-preset-env": "^1.7.0",
+		"css-loader": "^3.2.0",
+		"file-loader": "^4.2.0",
+		"script-loader": "^0.7.2",
+		"style-loader": "^1.0.0",
+		"webpack": "^4.41.0",
+		"webpack-cli": "^3.3.9",
+		"webpack-dev-server": "^3.8.2"
+	},
+	"scripts": {
+		"start": "webpack-dev-server --open",
+		"build": "webpack --config webpack.config.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Viacheslav-Filipenko/landing-test.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Viacheslav-Filipenko/landing-test/issues"
+	},
+	"homepage": "https://github.com/Viacheslav-Filipenko/landing-test#readme"
 }
