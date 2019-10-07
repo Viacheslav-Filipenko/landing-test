@@ -8,6 +8,7 @@
 		"express": "^4.17.1",
 		"install": "^0.13.0",
 		"mini-css-extract-plugin": "^0.8.0",
+		"parallax-js": "^3.1.0",
 		"path": "^0.12.7",
 		"postcss-loader": "^3.0.0",
 		"sass": "^1.23.0",
@@ -28,8 +29,7 @@
 		"webpack-dev-server": "^3.8.2"
 	},
 	"scripts": {
-		"start": "node app.js",
-		"dev": "webpack-dev-server --open",
+		"start": "webpack-dev-server",
 		"build": "webpack --config webpack.config.js",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
